@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Arcade Habit Tracker</title>
+   <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+   <div class="container">
+       <h1>🎮 Arcade Habit Tracker</h1>
+       <p>Complete habits to earn XP and level up!</p>
+
+       <div class="progress-bar">
+           <div class="xp-bar" id="xpProgress"></div>
+       </div>
+       <p>XP: <span id="xpCount">0</span>/100</p>
+
+       <!-- Habit Buttons Section -->
+       <div class="habit-list" id="habitList">
+           <button class="habit-btn" data-xp="1"> ★ Drink 3L of Water</button>
+           <button class="habit-btn" data-xp="1"> ★ Workout for 30 Minutes</button>
+           <button class="habit-btn" data-xp="1"> ★ Journal One Page</button>
+       </div>
+
+       <!-- New Habit Input Section -->
+       <input type="text" id="newHabitInput" placeholder="Enter new habit">
+       <input type="number" id="newHabitXP" placeholder="Enter XP" min="1">
+       <button id="addHabitBtn">Add Habit</button>
+
+<a href="hack.html" class="btn btn-back">BACK</a>
+       <!-- Reset Button -->
+       <button id="resetBtn">Reset Progress </button>
+   </div>
+
+
+   <script src="script.js"></script>
+</body>
+</html>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const addHabitBtn = document.getElementById('addHabitBtn');
+    const habitList = document.getElementById('habitList');
+    const newHabitInput = document.getElementById('newHabitInput');
+    const newHabitXP = document.getElementById('newHabitXP');
+    const xpCountDisplay = document.getElementById('xpCount');
+    const xpProgress = document.getElementById('xpProgress');
+    let xpCount = 0;
+
+    // Function to update XP and progress bar
+    function updateXP(amount) {
+        if (xpCount >= 100) return; // Prevent further increase if XP is already at or above 100
+
+        xpCount += amount;
+
+        // Ensure XP stays within 0-100 range
+        if (xpCount > 100) xpCount = 100;
+        if (xpCount < 0) xpCount = 0;
+
+        xpCountDisplay.textContent = xpCount;
+        xpProgress.style.width = `${(xpCount / 100) * 100}%`; // Update progress bar width
+
+        // Show congrats popup when reaching 100 XP
+        if (xpCount === 100) {
+            showCongratsPopup();
+        }
+    }
+
+    // Function to show congrats popup
+    function showCongratsPopup() {
+        // Check if the popup already exists to prevent multiple popups
+        if (document.querySelector('.congrats-popup')) return;
+
+        const popup = document.createElement('div');
+        popup.classList.add('congrats-popup');
+        popup.innerHTML = `<h2>🎉 Congrats! You've reached 100 stars! 🎉</h2>`;
+
+        // Close button for the popup
+        const closeBtn = document.createElement('button');
+        closeBtn.textContent = 'Close';
+        closeBtn.addEventListener('click', () => {
+            popup.remove();
+        });
+
+        popup.appendChild(closeBtn);
+        document.body.appendChild(popup);
+
+        // Automatically remove popup after a few seconds
+        setTimeout(() => {
+            popup.remove();
+        }, 5000); // Remove after 5 seconds
+    }
+
+    // Add event listeners to habit buttons
+    function addHabitButtonListeners() {
+        const habitButtons = document.querySelectorAll('.habit-btn');
+        habitButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const xp = parseInt(button.getAttribute('data-xp'), 10);
+                updateXP(xp);
+            });
+        });
+    }
+
+    // Add listeners to built-in habit buttons
+    addHabitButtonListeners();
+
+    // Event listener for adding new habits
+    addHabitBtn.addEventListener('click', () => {
+        const habitName = newHabitInput.value.trim();
+        const habitXP = parseInt(newHabitXP.value, 10);
+
+        if (habitName && !isNaN(habitXP) && habitXP > 0) {
+            // Create a new habit button
+            const newHabitBtn = document.createElement('button');
+            newHabitBtn.classList.add('habit-btn');
+            newHabitBtn.textContent = `★ ${habitName}`;
+            newHabitBtn.setAttribute('data-xp', habitXP);
+
+            // Add the new habit button to the habit list
+            habitList.appendChild(newHabitBtn);
+
+            // Reset input fields
+            newHabitInput.value = '';
+            newHabitXP.value = '';
+
+            // Add event listener for the new habit button to track XP
+            newHabitBtn.addEventListener('click', () => {
+                const xp = parseInt(newHabitBtn.getAttribute('data-xp'), 10);
+                updateXP(xp);
+            });
+        } else {
+            alert('Please enter a valid habit and XP.');
+        }
+    });
+
+    const resetBtn = document.getElementById('resetBtn');
+    resetBtn.addEventListener('click', () => {
+        xpCount = 0;
+        xpCountDisplay.textContent = xpCount;
+        xpProgress.style.width = '0%'; // Reset progress bar
+    });
+});
+ </script>
+
+ <script src="https://static.elfsight.com/platform/platform.js" async></script>
+    <div class="elfsight-app-446b4fa9-bf9d-49b6-b6d2-9731eae77a15" data-elfsight-app-lazy></div>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+body {
+   font-family: 'Press Start 2P', cursive;
+   background-color: #20004d;
+   color: limegreen;
+   text-align: center;
+   padding: 20px;
+}
+
+
+.container {
+   max-width: 400px;
+   margin: auto;
+   padding: 20px;
+   border: 3px solid rgb(255, 172, 237);
+   border-radius: 10px;
+   background-color: #20004d;
+   box-shadow: 0px 0px 10px rgb(255, 171, 238);
+
+}
+
+
+.habit-btn {
+   display: block;
+   width: 100%;
+   margin: 10px 0;
+   padding: 10px;
+   font-size: 14px;
+   background-color: #20004d;
+   color: limegreen;
+   border: 2px solid (255, 172, 237);
+   cursor: pointer;
+   font-family: 'Press Start 2P', cursive;
+   border-radius: 10px;
+}
+.habit-btn:hover {
+   background-color: #240046;
+   color:#ff66ff;
+}
+
+
+.progress-bar {
+   width: 100%;
+   height: 20px;
+   background: rgb(255, 255, 255);
+   border: 2px solid limegreen;
+   margin: 10px 0;
+}
+
+
+.xp-bar {
+   height: 100%;
+   width: 0%;
+   background: limegreen;
+   transition: width 0.3s;
+}
+
+
+#resetBtn {
+   margin-top: 20px;
+   padding: 20px;
+   background-color:#ff66ff;
+   color: white;
+   border: none;
+   cursor: pointer;
+   font-family: 'Press Start 2P', cursive;
+   Border-radius: 10px;
+}
+#resetBtn:hover {
+   background-color: #ff66ff;
+   color:#fb2dfb;
+}
+/* Make the input fields match the rest of the design */
+#newHabitInput, #newHabitXP {
+   width: 100%;
+   margin: 10px 0;
+   padding: 10px;
+   font-size: 14px;
+   background-color: #20004d;
+   color: limegreen;
+   border: 2px solid rgb(255, 172, 237);
+   border-radius: 5px; /* Rounded corners */
+   font-family: 'Press Start 2P', cursive;
+   box-sizing: border-box; /* Makes the padding part of the width */
+}
+
+
+/* Style for the "Add Habit" button to match habit buttons */
+#addHabitBtn {
+   width: 100%;
+   margin: 10px 0;
+   padding: 10px;
+   font-size: 14px;
+   background-color: #20004d;
+   color: limegreen;
+   border: 2px solid rgb(255, 172, 237);
+   cursor: pointer;
+   border-radius: 5px; /* Rounded corners */
+   font-family: 'Press Start 2P', cursive;
+}
+
+
+/* Hover effect for the "Add Habit" button */
+#addHabitBtn:hover {
+   background-color: #240046;
+   color: #ff66ff;
+}
+
+
+/* Make the reset button and progress bar fit with the design */
+#resetBtn {
+  padding: 8px 10px;
+  font-size: 16px;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+
+#resetBtn:hover {
+   background-color: #fb2dfb;
+}
+
+
+.progress-bar {
+   width: 100%;
+   height: 20px;
+   background: gray;
+   border: 2px solid limegreen;
+   margin: 10px 0;
+}
+
+.congrats-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.congrats-popup button {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #ff5733;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.congrats-popup button:hover {
+    background-color: #e44a1c;
+}
+
+
+.xp-bar {
+   height: 100%;
+   width: 0%;
+   background: limegreen;
+   transition: width 0.3s;
+}
+.buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: right;
+    gap: 20px;
+}
+.btn {
+  padding: 8px 10px;
+  font-size: 16px;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+.btn-back {
+    background: #fb2dfb;
+}
+
+</style>

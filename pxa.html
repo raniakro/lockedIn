@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+   <title>Journal</title>
+   <style>
+       @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+
+       body {
+           font-family: 'Press Start 2P', cursive;
+           background-color: #20004d;
+           color: limegreen;
+           text-align: center;
+           padding: 40px;
+       }
+
+
+       .journal-container {
+           max-width: 600px;
+           margin: auto;
+           padding: 40px;
+           border: 3px solid rgb(255, 172, 237);
+           border-radius: 10px;
+           background-color: #20004d;
+           box-shadow: 0px 0px 15px rgb(255, 171, 238);
+           text-align: center;
+       }
+
+
+       .journal-container h2 {
+           font-size: 32px;
+           margin-bottom: 20px;
+       }
+
+
+       .journal-textarea {
+           width: 100%;
+           height: 300px;
+           background-color: #20004d;
+           color: limegreen;
+           border: 2px solid rgb(255, 172, 237);
+           border-radius: 10px;
+           padding: 20px;
+           font-family: 'Press Start 2P', cursive;
+           resize: none;
+           box-sizing: border-box;
+           font-size: 16px;
+       }
+
+
+       #saveEntryBtn {
+           width: 100%;
+           margin: 20px 0;
+           padding: 15px;
+           font-size: 18px;
+           background-color: #20004d;
+           color: limegreen;
+           border: 2px solid rgb(255, 172, 237);
+           cursor: pointer;
+           font-family: 'Press Start 2P', cursive;
+           border-radius: 10px;
+       }
+
+
+       #saveEntryBtn:hover {
+           background-color: #240046;
+           color: #ff66ff;
+       }
+
+
+       .journalProgress {
+           width: 100%;
+           height: 20px;
+           background: gray;
+           border: 2px solid limegreen;
+           margin: 20px 0;
+       }
+
+
+       .xp-bar {
+           height: 100%;
+           width: 0%;
+           background: limegreen;
+           transition: width 0.3s;
+       }
+       .buttons {
+           margin-top: 20px;
+           display: flex;
+           justify-content: center;
+           gap: 20px;
+       }
+
+       .btn {
+           padding: 20px 40px;
+           font-size: 16px;
+           color: #fff;
+           border: none;
+           border-radius: 5px;
+           text-decoration: none;
+           cursor: pointer;
+           box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+       }
+       .btn-start {
+           background: #00ff99;
+       }
+       .btn-menu {
+           background: #6699ff;
+       }
+       .btn-signin {
+           background: #ff3399;
+       }
+   </style>
+</head>
+<body>
+  <div class="clouds">
+          <div class="cloud cloud-1"></div>
+          <div class="cloud cloud-2"></div>
+          <div class="cloud cloud-3"></div>
+      </div>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+   <div class="journal-container">
+       <!-- Journaling Section -->
+       <h2>📝 Write Your Journal Entry</h2>
+           <textarea id="journalEntry" class="journal-textarea" placeholder="Type here..."></textarea>
+
+           <!-- Save Entry Button -->
+           <button id="saveEntryBtn" onclick= "popup" class="habit-btn">Save Entry</button>
+
+       <div class="arrow-container">
+ <button id = "backBtn" class="arrow right"><i class="fa-solid fa-arrow-left"></i></button>
+<button id = "nextBtn" class="arrow left"><i class="fa-solid fa-arrow-right"></i></button>
+           </div>
+
+       <div id="journalProgress" class="progress-bar">
+           <div class="xp-bar"></div>
+       </div>
+   </div>
+   <div class="buttons">
+       <a href="hack.html" class="btn btn-start">BACK</a>
+       <a href="rg.html" class="btn btn-signin">SIGN IN</a>
+   </div>
+
+<style>
+
+.clouds {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    pointer-events: none; /* Clouds won’t interfere with interactions */
+    opacity: 0.3;
+}
+
+.cloud {
+    position: fixed;
+    background-color: #fff;
+    border-radius: 50%;
+    opacity: 0.8;
+}
+
+/* Cloud 1 */
+.cloud-1 {
+    top: 10%;
+    left: -200px;
+    width: 300px;
+    height: 150px;
+    animation: moveClouds 35s linear infinite;
+}
+
+.cloud-1::before, .cloud-1::after {
+    content: '';
+    position: absolute;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.cloud-1::before {
+    top: -40px;
+    left: 50px;
+    width: 180px;
+    height: 120px;
+}
+
+.cloud-1::after {
+    top: -20px;
+    left: 130px;
+    width: 160px;
+    height: 100px;
+}
+
+/* Cloud 2 */
+.cloud-2 {
+    top: 30%;
+    left: -250px;
+    width: 250px;
+    height: 130px;
+    animation: moveClouds 40s linear infinite;
+}
+
+.cloud-2::before, .cloud-2::after {
+    content: '';
+    position: absolute;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.cloud-2::before {
+    top: -30px;
+    left: 50px;
+    width: 170px;
+    height: 110px;
+}
+
+.cloud-2::after {
+    top: -10px;
+    left: 100px;
+    width: 150px;
+    height: 90px;
+}
+
+/* Cloud 3 */
+.cloud-3 {
+    top: 50%;
+    left: -500px;
+    width: 280px;
+    height: 140px;
+    animation: moveClouds 45s linear infinite;
+}
+
+.cloud-3::before, .cloud-3::after {
+    content: '';
+    position: absolute;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.cloud-3::before {
+    top: -20px;
+    left: 80px;
+    width: 120px;
+    height: 70px;
+}
+
+.cloud-3::after {
+    top: 0;
+    left: 120px;
+    width: 130px;
+    height: 70px;
+}
+
+/* Animation for cloud movement */
+@keyframes moveClouds {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(100vw); /* Move to full viewport width */
+    }
+}
+
+.arrow {
+            font-size: 24px;
+            padding: 15px 20px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;  /* Transparent background */
+            color: #41e14c;  /* Neon green arrow */
+            border: 2px solid #41e14c;  /* Green border */
+            box-shadow: 0 0 10px rgba(65, 225, 76, 0.8),
+                        0 0 20px rgba(65, 225, 76, 0.8);  /* Neon glow */
+            width: 50px;
+            height: 50px;
+            text-align: center;
+        }
+
+        /* Stronger glow effect on hover */
+        .arrow:hover {
+            box-shadow: 0 0 20px rgba(65, 225, 76, 1),
+                        0 0 40px rgba(65, 225, 76, 1);
+            transform: scale(1.1);
+        }
+
+        /* Click effect */
+        .arrow:active {
+            transform: scale(0.9);
+        }
+        let journalEntries = JSON.parse(localStorage.getItem("journalEntries")) || [];
+                let currentIndex = journalEntries.length > 0 ? journalEntries.length - 1 : -1;
+
+                function loadEntry(index) {
+                    if (index >= 0 && index < journalEntries.length) {
+                        document.getElementById("journalEntry").value = journalEntries[index];
+                        currentIndex = index;
+                    } else {
+                        document.getElementById("journalEntry").value = "";
+                    }
+                }
+
+                document.addEventListener("DOMContentLoaded", () => {
+                    if (currentIndex >= 0) {
+                        loadEntry(currentIndex);
+                    }
+                });
+
+                // Save journal entry
+                document.getElementById("saveEntryBtn").addEventListener("click", function() {
+                    const entryText = document.getElementById("journalEntry").value;
+                    if (entryText.trim() === "") {
+                        alert("Cannot save an empty entry.");
+                        return;
+                    }
+
+                    if (currentIndex === journalEntries.length - 1) {
+                        journalEntries.push(entryText);
+                    } else {
+                        journalEntries[currentIndex] = entryText;
+                    }
+
+                    localStorage.setItem("journalEntries", JSON.stringify(journalEntries));
+                    document.getElementById("popup").style.display = "block";
+                });
+
+                // Close pop-up
+                function closePopup() {
+                    document.getElementById("popup").style.display = "none";
+                }
+
+                // Move to previous entry
+                document.getElementById("backBtn").addEventListener("click", function() {
+                    if (currentIndex > 0) {
+                        loadEntry(currentIndex - 1);
+                    }
+                });
+
+                // Move to next entry or create new page
+                document.getElementById("nextBtn").addEventListener("click", function() {
+                    if (currentIndex < journalEntries.length - 1) {
+                        loadEntry(currentIndex + 1);
+                    } else {
+                        document.getElementById("journalEntry").value = "";
+                        currentIndex = journalEntries.length;
+                    }
+                });
+            </script>
+
+        /* Spacing for left and right arrows */
+        .arrow.left {
+            margin-right: 15px;
+        }
+
+        .arrow.right {
+            margin-left: 15px;
+        }
+
+        /* Center container */
+        .arrow-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        /* Popup Window */
+       .popup {
+           display: none;
+           position: fixed;
+           top: 50%;
+           left: 50%;
+           transform: translate(-50%, -50%);
+           width: 300px;
+           padding: 20px;
+           background-color: #240049;
+           color: white;
+           text-align: center;
+           border-radius: 10px;
+           box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+       }
+
+       .popup button {
+           margin-top: 10px;
+           padding: 10px 15px;
+           background: #6699ff;
+           border: none;
+           color: black;
+           cursor: pointer;
+           font-weight: bold;
+           border-radius: 5px;
+       }
+
+
+</style>
+
+    <!-- Pop-up Message -->
+    <div id="popup" class="popup">
+       <p>✅ Entry Saved!</p>
+       <button onclick="closePopup()">OK</button>
+   </div>
+
+    <!-- Saved Entry Section -->
+    <div id="savedEntry"></div>
+
+    <script>
+    let journalEntries = JSON.parse(localStorage.getItem("journalEntries")) || [];
+    let currentIndex = journalEntries.length > 0 ? journalEntries.length - 1 : -1;
+
+    function loadEntry(index) {
+        if (index >= 0 && index < journalEntries.length) {
+            document.getElementById("journalEntry").value = journalEntries[index];
+            currentIndex = index;
+        } else {
+            document.getElementById("journalEntry").value = "";
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        if (currentIndex >= 0) {
+            loadEntry(currentIndex);
+        }
+    });
+
+    // Save journal entry
+    document.getElementById("saveEntryBtn").addEventListener("click", function() {
+        const entryText = document.getElementById("journalEntry").value;
+        if (entryText.trim() === "") {
+            alert("Cannot save an empty entry.");
+            return;
+        }
+
+        if (currentIndex === journalEntries.length - 1) {
+            journalEntries.push(entryText);
+        } else {
+            journalEntries[currentIndex] = entryText;
+        }
+
+        localStorage.setItem("journalEntries", JSON.stringify(journalEntries));
+        document.getElementById("popup").style.display = "block";
+    });
+
+    // Close pop-up
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Move to previous entry
+    document.getElementById("backBtn").addEventListener("click", function() {
+        if (currentIndex > 0) {
+            loadEntry(currentIndex - 1);
+        }
+    });
+
+    // Move to next entry or create new page
+    document.getElementById("nextBtn").addEventListener("click", function() {
+        if (currentIndex < journalEntries.length - 1) {
+            loadEntry(currentIndex + 1);
+        } else {
+            document.getElementById("journalEntry").value = "";
+            currentIndex = journalEntries.length;
+        }
+    });
+
+    </script>
+
+</body>
+</html>

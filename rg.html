@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcade Theme Registry</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> <!-- Pixel font -->
+    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS -->
+</head>
+<body>
+    <div class="arcade-container">
+        <header>
+            <h1>SIGN IN</h1>
+            <p class="subheading">Join the game and level up your productivity!</p>
+        </header>
+
+        <div class="form-container">
+            <form class="registry-form">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Create a password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password:</label>
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+                </div>
+
+                <div class="buttons">
+                    <a href="hack.html" class="btn btn-back">BACK</a>
+                </div>
+
+                <button onclick="window.location.href='pageee.html';" class="register-btn">Start Your Journey!</button>
+
+            </form>
+        </div>
+
+
+    </div>
+</body>
+</html>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Press Start 2P', cursive;
+    background-color: #20004d;
+    color: #ff66ff;;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.arcade-container {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #6699ff, #ff3399); /* Neon gradient */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+header h1 {
+    text-align: center;
+    font-size: 2rem;
+    text-transform: uppercase;
+
+    color: #fff;
+    text-shadow: 0 0 10px #fff, 0 0 20px #ff3399, 0 0 30px #ff00ff, 0 0 40px #ff00ff;
+}
+
+.subheading {
+    text-align: center;
+    font-size: 1rem;
+    color: #00ff99;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #ff00ff;
+}
+.buttons {
+
+    display: flex;
+left: 10px;
+
+}
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+.btn-back {
+    background: #00ff99;
+}
+.form-container {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+}
+
+.registry-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    color: #f8f8f8;
+    text-shadow: 0 0 5px #ff00ff;
+}
+
+input {
+    padding: 10px;
+
+    font-size: 1rem;
+    background-color: #222;
+    border: 2px solid #ff00ff;
+    border-radius: 5px;
+    color: #fff;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input:focus {
+    border-color: #ff6a00;
+    box-shadow: 0 0 5px #ff6a00;
+}
+
+.register-btn {
+    padding: 15px;
+    font-size: 1.5rem;
+    background-color: #ff00ff;
+
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-transform: uppercase;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.register-btn:hover {
+    background-color: #ff6a00;
+    box-shadow: 0 0 15px #ff6a00, 0 0 30px #ff6a00;
+}
+
+
+footer {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #f8f8f8;
+    margin-top: 30px;
+}
+</style>
